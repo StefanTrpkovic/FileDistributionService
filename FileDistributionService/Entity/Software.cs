@@ -7,7 +7,10 @@
         public ICollection<ClientSoftware> ClientSoftwares { get; set; }
         public ICollection<SoftwareChannel> SoftwareChannels { get; set; }
         public ICollection<SoftwareVersion> SoftwareVersions { get; set; }
-        public int CountryId { get; set; }
-        public Country Country { get; set; }
+        public int SoftwareTypeId { get; set; }
+        public SoftwareType SoftwareType { get; set; }
+        public ICollection<SoftwareCountry> SoftwareCountries { get; set; }
+        public Guid PackageVersion { get; set; }
+
     }
 }

@@ -1,9 +1,9 @@
 ﻿namespace FileDistributionService.Entity
 {
-    public class SoftVersion
+    public class Version
     {
         public int Id { get; set; }
-        public string Code { get; set; }
+        public string Version { get; set; }
         public ICollection<SoftwareVersion> SoftwareVersions { get; set; }
 
     }
