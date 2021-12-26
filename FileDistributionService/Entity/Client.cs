@@ -6,6 +6,6 @@
         public string Name { get; set; }
         public int CountryId { get; set; }
         public Country Country { get; set; }
-        public ICollection<Software> Software { get; set; }
+        public ICollection<ClientSoftware> ClientSoftwares { get; set; }
     }
 }
