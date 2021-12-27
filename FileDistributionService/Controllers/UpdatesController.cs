@@ -1,7 +1,5 @@
-﻿using FileDistributionService.Data;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.IdentityModel.Tokens.Jwt;
 
 namespace FileDistributionService.Controllers
 {
@@ -9,40 +7,27 @@ namespace FileDistributionService.Controllers
     [ApiController]
     public class UpdatesController : ControllerBase
     {
-        private readonly DataContext _dataContext;
-        public UpdatesController(DataContext dataContext)
+        private readonly IUpdates _updates;
+        public UpdatesController(IUpdates updates)
         {
-            _dataContext = dataContext;
+            _updates = updates;
         }
 
         [HttpGet("GetAvailableUpdates")]
         [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<IActionResult> GetAvailableUpdates(string packageId, string version)
+        public IActionResult GetAvailableUpdates(string packageId, int version)
         {
-            var bearerToken = HttpContext.Request.Headers["Authorization"][0];
-            var token = new JwtSecurityTokenHandler().ReadJwtToken(bearerToken.Replace("Bearer ", ""));
-            var userEmail = token.Payload.ToArray()[2].Value;
+            var client = _updates.GeClientFromUserEmail(HttpContext.Request.Headers["Authorization"][0]);
 
-            var client = _dataContext.Client.First(x => x.Email.Equals(userEmail));
-            var software = _dataContext.Software.FirstOrDefault(x => x.PackageVersion.ToString().Equals(packageId));
+            var software = _updates.CheckSoftwarePackage(packageId);
 
-            if (software == null)
-                return NotFound("Please insert a valid package id");
+            var clientSoftwareVersion = _updates.GetClientSoftwareVersion(client.Id, software.Id);
 
-            var clientSoftwareVersion = _dataContext.ClientSoftwareVersion.First(x => x.ClientId == client.Id && x.SoftwareId == software.Id);
+            var versionCode = _updates.GetVersionCode(version, clientSoftwareVersion.VersionId);
 
-            if (clientSoftwareVersion == null)
-                return NotFound("The specified client hasn't installed the requested package previosuly");
+            var clientSoftware = _updates.GetClientSoftwareVersion(clientSoftwareVersion.SoftwareId);
 
-            var versionCode = _dataContext.Version.First(x => x.Id == clientSoftwareVersion.VersionId).VersionCode;
-
-            var clientSoftware = _dataContext.SoftwareVersion.Where(x => x.SoftwareId == clientSoftwareVersion.SoftwareId).OrderByDescending(y => y.VersionId).First().;
-
-            if(versionCode == )
-
-
-
-
+            var highestSoftwareVersion = _updates.GetHighestSoftwareVersion(versionCode, clientSoftwareVersion.SoftwareId);
 
             return Ok();
         }
