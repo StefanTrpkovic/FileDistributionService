@@ -11,8 +11,9 @@ namespace FileDistributionService
         Client GeClientFromUserEmail(string bearerToken);
         Software CheckSoftwarePackage(string packageId);
         ClientSoftwareVersion GetClientSoftwareVersion(int clientId, int softwareId);
-        int GetVersionCode(int version, int versionId);
-        int GetHighestSoftwareVersion(int versionCode, int softwareId);
-        ICollection<SoftwareVersion> GetClientSoftwareVersion(int softwareId);       
+        void ValidateSoftCounAvailability(int softwareId, int countryId);
+        void ValidateVersion(ClientSoftwareVersion clientSoftwareVersion, int version);
+        void ValidateChannelAvailability(int softwareId, int channelId);
+        void ValidateDateAvailability(int softwareId, int version);
     }
 }

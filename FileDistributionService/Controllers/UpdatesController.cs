@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace FileDistributionService.Controllers
 {
@@ -17,19 +18,28 @@ namespace FileDistributionService.Controllers
         [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult GetAvailableUpdates(string packageId, int version)
         {
-            var client = _updates.GeClientFromUserEmail(HttpContext.Request.Headers["Authorization"][0]);
+            try
+            {
+                var software = _updates.CheckSoftwarePackage(packageId);
 
-            var software = _updates.CheckSoftwarePackage(packageId);
+                var client = _updates.GeClientFromUserEmail(HttpContext.Request.Headers["Authorization"][0]);
 
-            var clientSoftwareVersion = _updates.GetClientSoftwareVersion(client.Id, software.Id);
+                var clientSoftwareVersion = _updates.GetClientSoftwareVersion(client.Id, software.Id);
 
-            var versionCode = _updates.GetVersionCode(version, clientSoftwareVersion.VersionId);
+                _updates.ValidateVersion(clientSoftwareVersion, version);
 
-            var clientSoftware = _updates.GetClientSoftwareVersion(clientSoftwareVersion.SoftwareId);
+                _updates.ValidateSoftCounAvailability(software.Id, client.CountryId);
 
-            var highestSoftwareVersion = _updates.GetHighestSoftwareVersion(versionCode, clientSoftwareVersion.SoftwareId);
+                _updates.ValidateChannelAvailability(software.Id, client.ChannelId);
 
-            return Ok();
+                _updates.ValidateDateAvailability(software.Id, version);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, new { message = ex.Message });
+            }
+
+            return Ok("Your package will start downloading now");
         }
     }
 }
