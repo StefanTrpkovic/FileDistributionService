@@ -8,7 +8,7 @@
         public string Email { get; set; }
         public int CountryId { get; set; }
         public Country Country { get; set; }
-        public ICollection<ClientSoftware> ClientSoftwares { get; set; }
+        public ICollection<ClientSoftwareVersion> ClientSoftwares { get; set; }
         public int ChannelId { get; set; }
         public Channel Channel { get; set; }
     }

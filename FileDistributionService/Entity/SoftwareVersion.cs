@@ -7,5 +7,7 @@
 
         public int VersionId { get; set; }
         public Version Version { get; set; }
+
+        public DateTime ReleaseDate { get; set; }
     }
 }

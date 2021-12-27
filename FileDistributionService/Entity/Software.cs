@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public ICollection<ClientSoftware> ClientSoftwares { get; set; }
+        public ICollection<ClientSoftwareVersion> ClientSoftwares { get; set; }
         public ICollection<SoftwareChannel> SoftwareChannels { get; set; }
         public ICollection<SoftwareVersion> SoftwareVersions { get; set; }
         public int SoftwareTypeId { get; set; }
