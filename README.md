@@ -11,5 +11,5 @@
 6. A swagger UI will open and first we have to authenticate to the app so we can get a token
 7. Call [POST] /api/Account/GetToken with username and password from the file AccountsController.cs. You can also use "admin", "admin" as default
 8. After executing, copy the token from the response and insert it in the top right corner of the swagger page where it says "Authorize"
-* If we are using Postman, Insomnia or similar tool, we will have to put the token in the Authorization header
-9. Now we can call the /api/Updates/GetAvailableUpdates [GET] call
+* If you are using Postman, Insomnia or a similar tool, you will have to put the token in the Authorization header
+9. Now you can call the /api/Updates/GetAvailableUpdates [GET] call
