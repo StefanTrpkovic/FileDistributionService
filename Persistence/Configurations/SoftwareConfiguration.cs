@@ -1,11 +1,6 @@
 ﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Persistence.Configurations
 {
@@ -14,8 +9,19 @@ namespace Persistence.Configurations
         public void Configure(EntityTypeBuilder<Software> builder)
         {
             builder.ToTable(nameof(Software));
-            builder.HasOne(cl => cl.SoftwareType).WithMany(c => c.Softwares).HasForeignKey(cl => cl.SoftwareTypeId);
-            builder.HasData(new Software { Id = 1, Name = "Visual Studio", SoftwareTypeId = 1, PackageVersion = Guid.NewGuid() }, new Software { Id = 2, Name = "Visual Studio Code", SoftwareTypeId = 2, PackageVersion = Guid.NewGuid() }, new Software { Id = 3, Name = "Kaspersky", SoftwareTypeId = 3, PackageVersion = Guid.NewGuid() }, new Software { Id = 4, Name = "Avast Antivirus", SoftwareTypeId = 1, PackageVersion = Guid.NewGuid() }, new Software { Id = 5, Name = "Azure CLI", SoftwareTypeId = 3, PackageVersion = Guid.NewGuid() });
+            builder.HasOne(cl => cl.Channel).WithMany(c => c.Softwares).HasForeignKey(cl => cl.ChannelId);
+            builder.HasData(
+                new Software { Id = 1, Name = "Visual Studio", PackageVersion = Guid.NewGuid(), ReleaseDate = new DateTime(2017, 5, 12, 0, 0, 0, 0) , 
+                    Version = 1, ChannelId = 1 }, 
+                new Software { Id = 2, Name = "Visual Studio Code", PackageVersion = Guid.NewGuid(), ReleaseDate = new DateTime(2021, 5, 12, 0, 0, 0, 0), 
+                    Version = 1, ChannelId = 2 }, 
+                new Software { Id = 3, Name = "Visual Studio", PackageVersion = Guid.NewGuid(), ReleaseDate = new DateTime(2021, 8, 20, 0, 0, 0, 0), 
+                    Version = 2, ChannelId = 3 }, 
+                new Software { Id = 4, Name = "Visual Studio", PackageVersion = Guid.NewGuid(), ReleaseDate = new DateTime(2017, 5, 12, 0, 0, 0, 0), 
+                    Version = 3, ChannelId = 2 }, 
+                new Software { Id = 5, Name = "Visual Studio Code", PackageVersion = Guid.NewGuid(), ReleaseDate = new DateTime(2022, 5, 12, 0, 0, 0, 0), 
+                    Version = 2, ChannelId = 1 }
+            );
         }
     }
 }

@@ -8,9 +8,6 @@ namespace Domain.Exceptions
 {
     public class SoftwareCountryException : Exception 
     {
-        public SoftwareCountryException() : base("The software is not available for your country")
-        {
-
-        }
+        public SoftwareCountryException() : base("The software is not available for your country") { }
     }
 }

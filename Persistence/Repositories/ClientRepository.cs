@@ -12,8 +12,8 @@ namespace Persistence.Repositories
         public Client GeClientFromUserEmail(object userEmail) =>
             _dbContext.Client.First(x => x.Email.Equals(userEmail));
 
-        public ClientSoftwareVersion GetClientSoftwareVersion(int clientId, int softwareId) =>
-            _dbContext.ClientSoftwareVersion.FirstOrDefault(x => x.ClientId == clientId && x.SoftwareId == softwareId);
+        public ClientSoftware GetClientSoftware(int clientId, int softwareId) =>
+            _dbContext.ClientSoftware.FirstOrDefault(x => x.ClientId == clientId && x.SoftwareId == softwareId);
         
     }
 }

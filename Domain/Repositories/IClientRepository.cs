@@ -5,6 +5,6 @@ namespace Domain.Repositories
     public interface IClientRepository
     {
         Client GeClientFromUserEmail(object userEmail);
-        ClientSoftwareVersion GetClientSoftwareVersion(int clientId, int softwareId);
+        ClientSoftware GetClientSoftware(int clientId, int softwareId);
     }
 }

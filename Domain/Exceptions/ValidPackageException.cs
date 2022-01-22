@@ -8,9 +8,6 @@ namespace Domain.Exceptions
 {
     public class ValidPackageException : Exception 
     {
-        public ValidPackageException() : base("Please insert a valid package id")
-        {
-
-        }
+        public ValidPackageException() : base("Please insert a valid package id") { }
     }
 }

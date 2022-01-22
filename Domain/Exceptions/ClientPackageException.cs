@@ -8,9 +8,6 @@ namespace Domain.Exceptions
 {
     public sealed class ClientPackageException : Exception
     {
-        public ClientPackageException()
-            : base("The specified client hasn't installed the requested package previosuly")
-        {
-        }
+        public ClientPackageException() : base("The specified client hasn't installed the requested package previosuly") { }
     }
 }

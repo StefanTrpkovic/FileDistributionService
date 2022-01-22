@@ -14,7 +14,14 @@ namespace Persistence.Configurations
         public void Configure(EntityTypeBuilder<Country> builder)
         {
             builder.ToTable(nameof(Country));
-            builder.HasData(new Country { Id = 1, Name = "Macedonia" }, new Country { Id = 2, Name = "Italy" }, new Country { Id = 3, Name = "Denmark" }, new Country { Id = 4, Name = "USA" }, new Country { Id = 5, Name = "Russia" }, new Country { Id = 6, Name = "Czech Republic" });
+            builder.HasData(
+                new Country { Id = 1, Name = "Macedonia" }, 
+                new Country { Id = 2, Name = "Italy" }, 
+                new Country { Id = 3, Name = "Denmark" }, 
+                new Country { Id = 4, Name = "USA" }, 
+                new Country { Id = 5, Name = "Russia" }, 
+                new Country { Id = 6, Name = "Czech Republic" }
+            );
         }
     }
 }

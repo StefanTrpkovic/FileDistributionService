@@ -8,9 +8,6 @@ namespace Domain.Exceptions
 {
     public sealed class SameVersionException : Exception
     {
-        public SameVersionException()
-            : base("You already have that version installed of the package")
-        {
-        }
+        public SameVersionException() : base("You already have that version installed of the package") { }
     }
 }

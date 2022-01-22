@@ -8,9 +8,6 @@ namespace Domain.Exceptions
 {
     public sealed class NewerVersionException : Exception
     {
-        public NewerVersionException()
-            : base("You have a newer version installed of the package")
-        {
-        }
+        public NewerVersionException() : base("You have a newer version installed of the package") { }
     }
 }

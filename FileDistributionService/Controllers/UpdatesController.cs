@@ -21,8 +21,8 @@ namespace FileDistributionService.Controllers
             {
                 var software = _serviceManager.UpdateService.CheckSoftwarePackage(packageId);
                 var client = _serviceManager.ClientService.GeClientFromUserEmail(HttpContext.Request.Headers["Authorization"][0]);
-                var clientSoftwareVersion = _serviceManager.ClientService.GetClientSoftwareVersion(client.Id, software.Id);
-                _serviceManager.VersionService.ValidateVersion(clientSoftwareVersion, version);
+                var clientSoftware = _serviceManager.ClientService.GetClientSoftware(client.Id, software.Id);
+                _serviceManager.SoftwareService.ValidateVersion(clientSoftware, version);
                 _serviceManager.SoftwareService.ValidateSoftCounAvailability(software.Id, client.CountryId);
                 _serviceManager.ChannelService.ValidateChannelAvailability(software.Id, client.ChannelId);
                 _serviceManager.SoftwareService.ValidateDateAvailability(software.Id, version);

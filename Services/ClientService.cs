@@ -20,9 +20,9 @@ namespace Services
             return _repositoryManager.ClientRepository.GeClientFromUserEmail(userEmail);
         }
 
-        public ClientSoftwareVersion GetClientSoftwareVersion(int clientId, int softwareId)
+        public ClientSoftware GetClientSoftware(int clientId, int softwareId)
         {
-            var result = _repositoryManager.ClientRepository.GetClientSoftwareVersion(clientId, softwareId);
+            var result = _repositoryManager.ClientRepository.GetClientSoftware(clientId, softwareId);
 
             if (result == null)
                 throw new ClientSoftwareException();

@@ -12,7 +12,9 @@ namespace Persistence.Repositories
 
         public bool ValidateSoftCounAvailability(int softwareId, int countryId) =>
            _dbContext.SoftwareCountry.Any(x => x.SoftwareId == softwareId && x.CountryId == countryId);
-        public SoftwareVersion ValidateDateAvailability(int softwareId, int version) =>
-            _dbContext.SoftwareVersion.FirstOrDefault(y => y.SoftwareId == softwareId && y.VersionId == version);
+        public Software ValidateDateAvailability(int softwareId, int version) =>
+            _dbContext.Software.FirstOrDefault(y => y.Id == softwareId && y.Version == version);
+        public Software ValidateVersion(ClientSoftware clientSoftware) =>
+            _dbContext.Software.FirstOrDefault(y => y.Id == clientSoftware.SoftwareId);
     }
 }

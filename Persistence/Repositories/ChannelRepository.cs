@@ -9,7 +9,7 @@ namespace Persistence.Repositories
 
         public ChannelRepository(RepositoryDbContext dbContext) => _dbContext = dbContext;
 
-        public SoftwareChannel ValidateChannelAvailability(int softwareId, int channelId) =>
-            _dbContext.SoftwareChannel.FirstOrDefault(y => y.ChannelId == channelId && y.SoftwareId == softwareId);        
+        public Software ValidateChannelAvailability(int softwareId, int channelId) =>
+            _dbContext.Software.FirstOrDefault(y => y.ChannelId == channelId && y.Id == softwareId);        
     }
 }

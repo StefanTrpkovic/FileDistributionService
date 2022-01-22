@@ -5,7 +5,6 @@
         IChannelRepository ChannelRepository { get; }
         IClientRepository ClientRepository { get; }
         IUpdateRepository UpdateRepository { get; } 
-        IVersionRepository VersionRepository { get; }
         ISoftwareRepository SoftwareRepository { get; }
     }
 }

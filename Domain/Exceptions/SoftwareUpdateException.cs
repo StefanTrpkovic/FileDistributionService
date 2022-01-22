@@ -8,9 +8,6 @@ namespace Domain.Exceptions
 {
     public class SoftwareUpdateException : Exception 
     {
-        public SoftwareUpdateException() : base("This software has still not been released for update")
-        {
-
-        }
+        public SoftwareUpdateException() : base("This software has still not been released for update") { }
     }
 }

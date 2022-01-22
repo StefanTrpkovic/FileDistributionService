@@ -1,4 +1,5 @@
-﻿using Domain.Exceptions;
+﻿using Domain.Entities;
+using Domain.Exceptions;
 using Domain.Repositories;
 using Services.Abstractions;
 
@@ -27,6 +28,20 @@ namespace Services
                 if (softChannel.ReleaseDate > DateTime.Now)
                     throw new SoftwareUpdateException();
             }
+        }
+
+        public void ValidateVersion(ClientSoftware clientSoftwareVersion, int version)
+        {
+            var versionCode = _repositoryManager.SoftwareRepository.ValidateVersion(clientSoftwareVersion);
+
+            if (version == versionCode?.Version)
+                throw new SameVersionException();
+
+            if (version < versionCode?.Version)
+                throw new NewerVersionException();
+
+            if ((version - versionCode?.Version) > 1)
+                throw new SkipVersionException();
         }
     }
 }

@@ -11,7 +11,6 @@ namespace Services.Abstractions
         IChannelService ChannelService { get; }
         IClientService ClientService { get; }
         IUpdateService UpdateService { get; }
-        IVersionService VersionService { get; }
         ISoftwareService SoftwareService { get; }
     }
 }
