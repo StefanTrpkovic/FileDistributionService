@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using FileDistributionService.Models;
-using System.Collections.Generic;
-using System;
-using System.Linq;
+using Domain.AccountEntities;
+using Services.AccountService;
 
 namespace FileDistributionService.Controllers
 {
@@ -64,7 +62,7 @@ namespace FileDistributionService.Controllers
                 if (Valid)
                 {
                     var user = logins.FirstOrDefault(x => x.UserName.Equals(userLogins.UserName, StringComparison.OrdinalIgnoreCase));
-                    Token = JwtHelpers.JwtHelpers.GenTokenkey(new UserTokens()
+                    Token = JwtHelpers.GenTokenkey(new UserTokens()
                     {
                         EmailId = user.EmailId,
                         GuidId = Guid.NewGuid(),

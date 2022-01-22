@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Services.Abstractions;
 using System.Net;
 
 namespace FileDistributionService.Controllers
@@ -8,11 +9,9 @@ namespace FileDistributionService.Controllers
     [ApiController]
     public class UpdatesController : ControllerBase
     {
-        private readonly IUpdates _updates;
-        public UpdatesController(IUpdates updates)
-        {
-            _updates = updates;
-        }
+        private readonly IServiceManager _serviceManager;
+
+        public UpdatesController(IServiceManager serviceManager) => _serviceManager = serviceManager;
 
         [HttpGet("GetAvailableUpdates")]
         [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
@@ -20,19 +19,13 @@ namespace FileDistributionService.Controllers
         {
             try
             {
-                var software = _updates.CheckSoftwarePackage(packageId);
-
-                var client = _updates.GeClientFromUserEmail(HttpContext.Request.Headers["Authorization"][0]);
-
-                var clientSoftwareVersion = _updates.GetClientSoftwareVersion(client.Id, software.Id);
-
-                _updates.ValidateVersion(clientSoftwareVersion, version);
-
-                _updates.ValidateSoftCounAvailability(software.Id, client.CountryId);
-
-                _updates.ValidateChannelAvailability(software.Id, client.ChannelId);
-
-                _updates.ValidateDateAvailability(software.Id, version);
+                var software = _serviceManager.UpdateService.CheckSoftwarePackage(packageId);
+                var client = _serviceManager.ClientService.GeClientFromUserEmail(HttpContext.Request.Headers["Authorization"][0]);
+                var clientSoftwareVersion = _serviceManager.ClientService.GetClientSoftwareVersion(client.Id, software.Id);
+                _serviceManager.VersionService.ValidateVersion(clientSoftwareVersion, version);
+                _serviceManager.SoftwareService.ValidateSoftCounAvailability(software.Id, client.CountryId);
+                _serviceManager.ChannelService.ValidateChannelAvailability(software.Id, client.ChannelId);
+                _serviceManager.SoftwareService.ValidateDateAvailability(software.Id, version);
             }
             catch (Exception ex)
             {
