@@ -3,7 +3,7 @@
 ### Steps for successful run
 1. Clone the repo to your local computer
 2. Open Visual Studio or an IDE of your choice 
-3. In FileDistributionService\appsettings.Development.json in ConnectionStrings in DefaultConnection enter your desired server name where the db will be hosted
+3. In FileDistributionService\FileDistributionService\appsettings.json in ConnectionStrings in DefaultConnection enter your desired server name where the db will be hosted
 4. In Solution Explorer set your main project to be FileDistributionService
 5. In the Package Manager Console choose the  default project to be Persistence 
 6. In the Package Manager run:
