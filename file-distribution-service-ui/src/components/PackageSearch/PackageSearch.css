@@ -1,0 +1,26 @@
+.logoutLblPos {
+  position: fixed;
+  left: 10px;
+  top: 5px;
+}
+
+.packagesearch-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  font-size: 16px;
+  padding: 10px 32px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.messageLbl {
+  margin-top: 10px;
+}

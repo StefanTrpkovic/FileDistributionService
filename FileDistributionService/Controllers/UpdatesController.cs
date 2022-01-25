@@ -32,7 +32,7 @@ namespace FileDistributionService.Controllers
                 return StatusCode((int)HttpStatusCode.BadRequest, new { message = ex.Message });
             }
 
-            return Ok("Your package was successfully updated");
+            return Ok("{ \"message\": \"Your package was successfully updated\" }");
         }
     }
 }
