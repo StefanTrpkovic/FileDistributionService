@@ -10,9 +10,10 @@
 * Add-Migration Initial
 * Update-Database
 7. Once the database has been created you can start the back end API project
-8. From Visual Studio Code or from command prompt navigate to "FileDistributionService\file-distribution-service-ui" folder and run "npm i"
-9. in appsettings.json change the value of apiLoginEndpoint key to your API endpoint. For example "https://localhost:7040/api/" 
-10. Then run "npm start"
-11. The front end app will open in your default broswer
-12. Login with username and password from the file FileDistributionService/Controllers/AccountController.cs. You can also use "admin", "admin" as default
-13. Now you can use the app
+8. From Visual Studio Code or from command prompt navigate to "FileDistributionService\file-distribution-service-ui" folder
+9. Run npm i in the console
+10. in appsettings.json change the value of apiLoginEndpoint key to your API endpoint. For example "https://localhost:7040/api/" 
+11. Then run "npm start"
+12. The front end app will open in your default broswer
+13. Login with username and password from the file FileDistributionService/Controllers/AccountController.cs. You can also use "admin", "admin" as default
+14. Now you can use the app
