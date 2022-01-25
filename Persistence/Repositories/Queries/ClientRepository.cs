@@ -9,7 +9,7 @@ namespace Persistence.Repositories
 
         public ClientRepository(RepositoryDbContext dbContext) => _dbContext = dbContext;
 
-        public Client GeClientFromUserEmail(object userEmail) =>
+        public Client GetClientFromUserEmail(object userEmail) =>
             _dbContext.Client.First(x => x.Email.Equals(userEmail));
 
         public ClientSoftware GetClientSoftware(int clientId, int softwareId) =>

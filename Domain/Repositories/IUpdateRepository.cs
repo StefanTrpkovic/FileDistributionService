@@ -4,6 +4,6 @@ namespace Domain.Repositories
 {
     public interface IUpdateRepository
     {
-        Software CheckSoftwarePackage(string packageId);
+        void UpdateClientSoftware(int softwareId, int desiredSoftwareId, int clientId);
     }
 }

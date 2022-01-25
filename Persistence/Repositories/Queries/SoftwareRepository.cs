@@ -9,12 +9,13 @@ namespace Persistence.Repositories
 
         public SoftwareRepository(RepositoryDbContext dbContext) => _dbContext = dbContext;
 
-
         public bool ValidateSoftCounAvailability(int softwareId, int countryId) =>
            _dbContext.SoftwareCountry.Any(x => x.SoftwareId == softwareId && x.CountryId == countryId);
-        public Software ValidateDateAvailability(int softwareId, int version) =>
-            _dbContext.Software.FirstOrDefault(y => y.Id == softwareId && y.Version == version);
-        public Software ValidateVersion(ClientSoftware clientSoftware) =>
-            _dbContext.Software.FirstOrDefault(y => y.Id == clientSoftware.SoftwareId);
+
+        public Software CheckSoftwarePackage(string packageId) =>
+            _dbContext.Software.FirstOrDefault(x => x.PackageId.Equals(packageId));
+
+        public Software GetSoftwareByNameAndVersion(string name, int version) =>
+            _dbContext.Software.FirstOrDefault(x => x.Name.Equals(name) && x.Version == version);
     }
 }

@@ -8,6 +8,6 @@ namespace Domain.Exceptions
 {
     public class ChannelSoftwareException : Exception 
     {
-        public ChannelSoftwareException() : base("This software is not in the channel you subscribed") { }
+        public ChannelSoftwareException() : base("This software is not in, or has higher priority than the channel you subscribed") { }
     }
 }

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Domain.Exceptions
 {
-    public class ValidPackageException : Exception 
+    public class InvalidPackageException : Exception 
     {
-        public ValidPackageException() : base("Please insert a valid package id") { }
+        public InvalidPackageException() : base("Please insert a valid package id") { }
     }
 }

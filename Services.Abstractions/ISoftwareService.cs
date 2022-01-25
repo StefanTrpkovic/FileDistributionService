@@ -5,7 +5,9 @@ namespace Services.Abstractions
     public interface ISoftwareService
     {
         void ValidateSoftCounAvailability(int softwareId, int countryId);
-        void ValidateDateAvailability(int softwareId, int version);
-        void ValidateVersion(ClientSoftware clientSoftwareVersion, int version);
+        void ValidateDateAvailability(DateTime releaseDate);
+        Software ValidateVersion(Software softwareVersion, int version);
+        Software CheckSoftwarePackage(string packageId);
+        void UpdateClientSoftware(int softwareId, int desiredSoftwareId, int clientId);
     }
 }

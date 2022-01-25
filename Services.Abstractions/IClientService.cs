@@ -4,7 +4,8 @@ namespace Services.Abstractions
 {
     public interface IClientService
     {
-        Client GeClientFromUserEmail(string bearerToken);
+        Client GetClientFromUserEmail(string bearerToken);
         ClientSoftware GetClientSoftware(int clientId, int softwareId);
+        void ValidateChannelAvailability(int softwareId, int channelId);
     }
 }

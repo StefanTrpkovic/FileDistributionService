@@ -12,12 +12,12 @@ namespace Services
 
         public ClientService(IRepositoryManager repositoryManager) => _repositoryManager = repositoryManager;
 
-        public Client GeClientFromUserEmail(string bearerToken)
+        public Client GetClientFromUserEmail(string bearerToken)
         {
             var token = new JwtSecurityTokenHandler().ReadJwtToken(bearerToken.Replace("Bearer ", ""));
             var userEmail = token.Payload.ToArray()[2].Value;
 
-            return _repositoryManager.ClientRepository.GeClientFromUserEmail(userEmail);
+            return _repositoryManager.ClientRepository.GetClientFromUserEmail(userEmail);
         }
 
         public ClientSoftware GetClientSoftware(int clientId, int softwareId)
@@ -28,6 +28,12 @@ namespace Services
                 throw new ClientSoftwareException();
 
             return result;
+        }
+
+        public void ValidateChannelAvailability(int softwareChannelId, int clientChannelId)
+        {
+            if (softwareChannelId > clientChannelId)
+                throw new ChannelSoftwareException();
         }
     }
 }

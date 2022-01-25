@@ -19,29 +19,44 @@ namespace Services
             if (!result)
                 throw new SoftwareCountryException();
         }
-        public void ValidateDateAvailability(int softwareId, int version)
+        public void ValidateDateAvailability(DateTime releaseDate)
         {
-            var softChannel = _repositoryManager.SoftwareRepository.ValidateDateAvailability(softwareId, version);
-
-            if (softChannel != null)
-            {
-                if (softChannel.ReleaseDate > DateTime.Now)
-                    throw new SoftwareUpdateException();
-            }
+            if (releaseDate > DateTime.Now)
+                throw new SoftwareUpdateException();
         }
 
-        public void ValidateVersion(ClientSoftware clientSoftwareVersion, int version)
+        public Software ValidateVersion(Software software, int version)
         {
-            var versionCode = _repositoryManager.SoftwareRepository.ValidateVersion(clientSoftwareVersion);
+            var foundSoftware = _repositoryManager.SoftwareRepository.GetSoftwareByNameAndVersion(software.Name, version);
 
-            if (version == versionCode?.Version)
+            if(foundSoftware == null)
+                throw new NotExistantVersionException();
+
+            if (version == software.Version)
                 throw new SameVersionException();
 
-            if (version < versionCode?.Version)
+            if (version < software.Version)
                 throw new NewerVersionException();
 
-            if ((version - versionCode?.Version) > 1)
+            if ((version - software.Version) > 1)
                 throw new SkipVersionException();
+
+            return foundSoftware;
+        }
+
+        public Software CheckSoftwarePackage(string packageId)
+        {
+            var packageIdDb = _repositoryManager.SoftwareRepository.CheckSoftwarePackage(packageId);
+
+            if (packageIdDb == null)
+                throw new InvalidPackageException();
+
+            return packageIdDb;
+        }
+
+        public void UpdateClientSoftware(int softwareId, int desiredSoftwareId, int clientId)
+        {
+            _repositoryManager.UpdateRepository.UpdateClientSoftware(softwareId, desiredSoftwareId, clientId);
         }
     }
 }

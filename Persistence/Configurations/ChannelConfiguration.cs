@@ -15,9 +15,9 @@ namespace Persistence.Configurations
         {
             builder.ToTable(nameof(Channel));
             builder.HasData(
-                new Channel { Id = 1, Name = "Public" }, 
+                new Channel { Id = 1, Name = "Insider" }, 
                 new Channel { Id = 2, Name = "Internal Beta" }, 
-                new Channel { Id = 3, Name = "Insider" }
+                new Channel { Id = 3, Name = "Public" }
             );
         }
     }

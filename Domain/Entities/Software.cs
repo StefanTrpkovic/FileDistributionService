@@ -3,7 +3,7 @@
     public class Software : BaseEntity
     {
         public string Name { get; set; }
-        public Guid PackageVersion { get; set; }
+        public string PackageId { get; set; }
         public DateTime ReleaseDate { get; set; }
         public int Version { get; set; }
         public int ChannelId { get; set; }

@@ -19,20 +19,20 @@ namespace FileDistributionService.Controllers
         {
             try
             {
-                var software = _serviceManager.UpdateService.CheckSoftwarePackage(packageId);
-                var client = _serviceManager.ClientService.GeClientFromUserEmail(HttpContext.Request.Headers["Authorization"][0]);
+                var software = _serviceManager.SoftwareService.CheckSoftwarePackage(packageId);
+                var client = _serviceManager.ClientService.GetClientFromUserEmail(HttpContext.Request.Headers["Authorization"][0]);
                 var clientSoftware = _serviceManager.ClientService.GetClientSoftware(client.Id, software.Id);
-                _serviceManager.SoftwareService.ValidateVersion(clientSoftware, version);
+                _serviceManager.ClientService.ValidateChannelAvailability(software.ChannelId, client.ChannelId);
                 _serviceManager.SoftwareService.ValidateSoftCounAvailability(software.Id, client.CountryId);
-                _serviceManager.ChannelService.ValidateChannelAvailability(software.Id, client.ChannelId);
-                _serviceManager.SoftwareService.ValidateDateAvailability(software.Id, version);
+                var desiredSoftware = _serviceManager.SoftwareService.ValidateVersion(software, version);
+                _serviceManager.SoftwareService.UpdateClientSoftware(software.Id, desiredSoftware.Id, client.Id);
             }
             catch (Exception ex)
             {
-                return StatusCode((int)HttpStatusCode.InternalServerError, new { message = ex.Message });
+                return StatusCode((int)HttpStatusCode.BadRequest, new { message = ex.Message });
             }
 
-            return Ok("Your package will start downloading now");
+            return Ok("Your package was successfully updated");
         }
     }
 }
