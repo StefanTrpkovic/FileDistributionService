@@ -11,7 +11,7 @@
 * Update-Database
 7. Once the database has been created you can start the back end API project
 8. From Visual Studio Code or from command prompt navigate to "FileDistributionService\file-distribution-service-ui" folder
-9. Run npm i in the console
+9. Run "npm i" in the console
 10. in appsettings.json change the value of apiLoginEndpoint key to your API endpoint. For example "https://localhost:7040/api/" 
 11. Then run "npm start"
 12. The front end app will open in your default broswer
